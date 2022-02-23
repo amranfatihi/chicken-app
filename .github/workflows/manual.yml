@@ -1,0 +1,30 @@
+# This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
+# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
+
+name: Manual Deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        type: string
+        required: true
+      environment:
+        description: 'Environment to Deploy'
+        type: environment
+        required: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: ${{ github.event.inputs.environment }}
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up JDK 8
+      uses: actions/setup-java@v2
+      with:
+        java-version: '8'
+        distribution: 'temurin'
+        cache: maven
+    - name: Deploy to CH
+      run: mvn clean package deploy -DmuleDeploy -DskipTests -Dmule.env=${{ github.event.inputs.environment }} -Dmule.key=${{secrets.MULE_KEY}} -Danypoint.platform.client_id=${{secrets.PLATFORM_CLIENT_ID}} -Danypoint.platform.client_secret=${{secrets.PLATFORM_CLIENT_SECRET}} -s customSettings.xml -Dch.user=${{secrets.CH_USER}} -Dch.password=${{secrets.CH_PASSWORD}}
