@@ -4,7 +4,7 @@
 
 	<groupId>fc286652-5f5e-4c8c-b5dc-da0c213d8eb1</groupId>
 	<artifactId>chicken-app</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<packaging>mule-application</packaging>
 
 	<name>chicken-app</name>
@@ -19,6 +19,23 @@
 
 	<build>
 		<plugins>
+			<plugin>
+            <groupId>com.amashchenko.maven.plugin</groupId>
+            <artifactId>gitflow-maven-plugin</artifactId>
+            <version>1.18.0</version>
+            <configuration>
+                <gitFlowConfig>
+			        <productionBranch>master</productionBranch>
+			        <developmentBranch>develop</developmentBranch>
+			        <featureBranchPrefix>feature/</featureBranchPrefix>
+			        <releaseBranchPrefix>release/</releaseBranchPrefix>
+			        <hotfixBranchPrefix>hotfix/</hotfixBranchPrefix>
+			        <supportBranchPrefix>support/</supportBranchPrefix>
+			        <versionTagPrefix></versionTagPrefix>
+			        <origin>origin</origin>
+    			</gitFlowConfig>
+            </configuration>
+        	</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-clean-plugin</artifactId>
