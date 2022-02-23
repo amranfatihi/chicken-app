@@ -24,6 +24,7 @@
             <artifactId>gitflow-maven-plugin</artifactId>
             <version>1.18.0</version>
             <configuration>
+                <tychoBuild>true</tychoBuild>
                 <gitFlowConfig>
 			        <productionBranch>master</productionBranch>
 			        <developmentBranch>develop</developmentBranch>
